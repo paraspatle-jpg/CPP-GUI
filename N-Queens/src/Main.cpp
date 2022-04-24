@@ -39,8 +39,6 @@ bool isSafe(vector<vector<int>> board, int row, int col)
 
 bool solveNQUtil(vector<vector<int>>& board, int col)
 {
-	/* base case: If all queens are placed
-    then return true */
 	int N = board.size();
 	if (col == N)
 	{
@@ -58,31 +56,17 @@ bool solveNQUtil(vector<vector<int>>& board, int col)
 		return true;
 	}
 
-	/* Consider this column and try placing
-    this queen in all rows one by one */
 	bool res = false;
 	for (int i = 0; i < N; i++)
 	{
-		/* Check if queen can be placed on
-        board[i][col] */
+
 		if (isSafe(board, i, col))
 		{
-			/* Place this queen in board[i][col] */
 			board[i][col] = 1;
-
-			// Make result true if any placement
-			// is possible
 			res = solveNQUtil(board, col + 1) || res;
-
-			/* If placing queen in board[i][col]
-            doesn't lead to a solution, then
-            remove queen from board[i][col] */
-			board[i][col] = 0; // BACKTRACK
+			board[i][col] = 0;
 		}
 	}
-
-	/* If queen can not be place in any row in
-        this column col then return false */
 	return res;
 }
 
@@ -109,11 +93,9 @@ int main()
 				window.close();
 		}
 
-		// clear the window with black color
+
 		window.clear(sf::Color::Black);
 
-		// draw everything here...
-		// window.draw(...);
 		sf::Texture B_Queen;
 		B_Queen.loadFromFile("content/White.png");
 
